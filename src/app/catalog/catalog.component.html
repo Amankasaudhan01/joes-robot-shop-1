@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="filters">
+      <a class="button" (click)="filter = 'Heads'">Heads</a>
+      <a class="button bold" (click)="filter = 'Arms'">Arms</a>
+      <a class="button bold" (click)="filter = 'Torsos'">Torsos</a>
+      <a class="button bold" (click)="filter = 'Bases'">Bases</a>
+      <a class="button bold" (click)="filter = ''">All</a>
+    </div>
+  
+    <ul class="products">
+      <li class="product-item" *ngFor="let product of getFilteredProducts()">
+        <div class="product">
+          <div class="product-details">
+            <img src="{{getImageURL(product)}}" alt="abcd" />
+            <div class="product-info">
+              <div class="name">{{product.name}}</div>
+              <div class="description">{{product.description}}</div>
+              <div class="category">Part Type:{{product.category}} </div>
+            </div>
+          </div>
+          <div class="price">
+            <div class="bold" [ngClass] = "getDiscountedPrice(product)">{{product.price | currency: "INR"}}</div>
+            <div *ngIf="product.discount >0" class = "discount"> {{(product.price * (1-product.discount)) | currency:"INR"}}</div>
+            <button class="cta">Buy</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
